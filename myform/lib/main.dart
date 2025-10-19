@@ -82,7 +82,12 @@ class _HomescreenState extends State<Homescreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 20),
+                const Icon(
+                  Icons.account_circle,
+                  size: 100,
+                  color: Colors.green,
+                ),
+                const SizedBox(height: 30),
                 TextFormField(
                   controller: _usernameController,
                   decoration: const InputDecoration(
