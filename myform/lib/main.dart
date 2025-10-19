@@ -36,6 +36,13 @@ class _HomescreenState extends State<Homescreen> {
     return emailRegex.hasMatch(email);
   }
 
+  bool _validatePassword(String password) {
+    RegExp passwordRegex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#\$&*~]).{6,}$',
+    );
+    return passwordRegex.hasMatch(password);
+  }
+
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -99,7 +106,7 @@ class _HomescreenState extends State<Homescreen> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Username is required';
                     }
                     if (value.length < 3) {
@@ -123,7 +130,7 @@ class _HomescreenState extends State<Homescreen> {
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return "Email is required";
                     }
                     if (!_validateEmail(value)) {
@@ -143,15 +150,19 @@ class _HomescreenState extends State<Homescreen> {
                     hintText: "Enter Password",
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
+                    errorMaxLines: 2,
                   ),
                   obscureText: true,
                   textInputAction: TextInputAction.done,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Password is required';
                     }
-                    if (value.length < 6) {
+                    if (value.trim().length < 6) {
                       return 'Password must be at least 6 characters';
+                    }
+                    if (!_validatePassword(value)) {
+                      return 'Password must contain at least 1 uppercase letter, 1 lowercase letter';
                     }
                     return null;
                   },
