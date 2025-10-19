@@ -73,7 +73,7 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         title: const Text(
           "Login Page",
@@ -92,7 +92,7 @@ class _HomescreenState extends State<Homescreen> {
                 const Icon(
                   Icons.account_circle,
                   size: 100,
-                  color: Colors.green,
+                  color: Colors.black,
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
@@ -174,7 +174,7 @@ class _HomescreenState extends State<Homescreen> {
                 ElevatedButton(
                   onPressed: _submitForm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
@@ -191,9 +191,9 @@ class _HomescreenState extends State<Homescreen> {
                 OutlinedButton(
                   onPressed: _resetForm,
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.green,
+                    foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    side: const BorderSide(color: Colors.green, width: 2),
+                    side: const BorderSide(color: Colors.black, width: 2),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
