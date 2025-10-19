@@ -31,6 +31,7 @@ class _HomescreenState extends State<Homescreen> {
   String? _username;
   String? _email;
   String? _password;
+  bool _isEnabled = false;
   bool _validateEmail(String email) {
     RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(email);
@@ -162,7 +163,7 @@ class _HomescreenState extends State<Homescreen> {
                       return 'Password must be at least 6 characters';
                     }
                     if (!_validatePassword(value)) {
-                      return 'Password must contain at least 1 uppercase letter, 1 lowercase letter';
+                      return 'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character and one number';
                     }
                     return null;
                   },
@@ -202,6 +203,21 @@ class _HomescreenState extends State<Homescreen> {
                     'Reset',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Enable notifications"), // or whatever purpose
+                    Switch(
+                      value: _isEnabled,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _isEnabled = value;
+                        });
+                      },
+                      activeColor: Colors.indigo,
+                    ),
+                  ],
                 ),
               ],
             ),
