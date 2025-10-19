@@ -31,6 +31,7 @@ class _HomescreenState extends State<Homescreen> {
   String? _username;
   String? _email;
   String? _password;
+  String selectedTime = "Select Time";
   bool _isEnabled = false;
   bool _validateEmail(String email) {
     RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -68,6 +69,23 @@ class _HomescreenState extends State<Homescreen> {
     _usernameController.clear();
     _emailController.clear();
     _passwordController.clear();
+    setState(() {
+    _isEnabled = false;
+    selectedTime = "Select Time";
+  });
+  }
+
+  Future<void> _selectTime() async {
+    TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked.format(context);
+      });
+    }
   }
 
   @override
@@ -218,6 +236,18 @@ class _HomescreenState extends State<Homescreen> {
                       activeColor: Colors.indigo,
                     ),
                   ],
+                ),
+                ElevatedButton(
+                  onPressed: _selectTime,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[300],
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(selectedTime),
                 ),
               ],
             ),
